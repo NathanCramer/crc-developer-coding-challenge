@@ -115,10 +115,18 @@ def get_workout_scores():
             if workout_score['score'] == -1:
                 workout_score['score'] = "No Score"
 
-    # Add a read-value where the comma is replaced with a :
+    # Replace , with : in the read-score and ensure it is in the format 00:00
     for participant_workout in participant_workouts:
         for workout_score in participant_workout['workout_scores']:
-            workout_score['read_score'] = str(workout_score['score']).replace('.', ':')
+            if workout_score['score'] != "No Score":
+                workout_score['read_score'] = str(workout_score['score']).replace(".", ":")
+
+                for i in range(2 - len(workout_score['read_score'].split(":")[0])):
+                    workout_score['read_score'] = "0" + workout_score['read_score']
+
+                for i in range(2 - len(workout_score['read_score'].split(":")[1])):
+                    workout_score['read_score'] = workout_score['read_score'] + "0"
+
 
 
     return participant_workouts

@@ -46,6 +46,11 @@ def index(request):
         participant_workout_chart_data[participant_workout.participant_id - 1]['data'][
             participant_workout.workout_id - 1] = participant_workout.score
 
+    
+
+
+
+
     return render(request, 'index.html', {
         'participant_workout_chart_data': participant_workout_chart_data,
         'workouts': [workout.name for workout in workouts]
