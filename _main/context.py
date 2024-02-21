@@ -1,5 +1,9 @@
+import os
+from django.conf import settings
+import secrets
+
+
 def global_context(request):
     return {
-        'open_ai_api_key': "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",  # Use environment variable in prod
-        'weather_api_key': "4ff3544f148691def0dc09dcb61d5c67",  # Use environment variable in prod
+        'open_ai_api_key': secrets.OPEN_AI_API_KEY if settings.STAGE == "dev" else os.environ["OPEN_AI_API_KEY"] ,  # Use environment variable in prod
     }
