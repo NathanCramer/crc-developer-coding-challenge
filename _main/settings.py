@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-&71up1rui1q#-za6+d*0%8)lq2*rx3wms7^)^ty+bsa@%3qw+=
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "https://crc-dev-challenge-d6c5182aa53d.herokuapp.com/"
+    "crc-dev-challenge-d6c5182aa53d.herokuapp.com"
 ]
 
 # Application definition
