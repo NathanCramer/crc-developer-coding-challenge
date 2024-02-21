@@ -1,92 +1,105 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
-    <link href="https://cdn.datatables.net/v/dt/dt-2.0.0/datatables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/2.0.0/css/dataTables.tailwindcss.css" rel="stylesheet"/>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+		<link href="https://cdn.datatables.net/v/dt/dt-2.0.0/datatables.min.css" rel="stylesheet" />
+		<link href="https://cdn.datatables.net/2.0.0/css/dataTables.tailwindcss.css" rel="stylesheet" />
 
+		<script src="https://kit.fontawesome.com/00cdf79797.js" crossorigin="anonymous"></script>
+		{% block styles %} {% endblock %}
+	</head>
+	<body>
+		<div class="">
+			<div class="min-w-full min-h-screen bg-gradient-to-r from-indigo-950 to-slate-900">
+				<nav class="bg-gradient-to-r from-emerald-500 to-indigo-950 text-white p-4">
+					<div class="container mx-auto flex justify-between items-center">
+						<div>
+							<img
+								src="https://scqafmxghfczndznwuiu.supabase.co/storage/v1/object/public/assets/crcdevtestlogo.png?t=2024-02-20T16%3A16%3A11.369Z"
+								alt="Logo"
+								class="h-14 w-14 -my-2 object-cover"
+							/>
+						</div>
+						<div class="hidden md:flex space-x-4">
+							<a
+								href="/"
+								class="p-2 rounded transition ease-in-out hover:-translate-x-1 hover:scale-110 hover:bg-emerald-500 font-bold duration-300"
+								>Dashboard</a
+							>
+							<a
+								href="/workouts"
+								class="p-2 rounded transition ease-in-out hover:-translate-x-1 hover:scale-110 hover:bg-emerald-500 font-bold duration-300"
+								>Workouts</a
+							>
+							<a
+								href="/participants"
+								class="p-2 rounded transition ease-in-out hover:-translate-x-1 hover:scale-110 hover:bg-emerald-500 font-bold duration-300"
+								>Participants</a
+							>
+							<a
+								href="/scores"
+								class="p-2 rounded transition ease-in-out hover:-translate-x-1 hover:scale-110 hover:bg-emerald-500 font-bold duration-300"
+								>Scores</a
+							>
+							<a
+								href="/api/docs"
+								class="p-2 rounded transition ease-in-out hover:-translate-x-1 hover:scale-110 hover:bg-emerald-500 font-bold duration-300"
+								>API</a
+							>
+						</div>
+						<div class="md:hidden">
+							<button id="menuButton" class="focus:outline-none focus:shadow-outline">
+								<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+								</svg>
+							</button>
+						</div>
+					</div>
+					<!-- Mobile Menu -->
+					<div id="mobileMenu" class="md:hidden hidden">
+						<a href="/" class="block p-2 hover:bg-gray-700 rounded">Dashboard</a>
+						<a href="/workouts" class="block p-2 hover:bg-gray-700 rounded">Workouts</a>
+						<a href="/participants" class="block p-2 hover:bg-gray-700 rounded">Participants</a>
+						<a href="/scores" class="block p-2 hover:bg-gray-700 rounded">Scores</a>
+					</div>
+				</nav>
 
+				<div class="container mx-auto p-10 text-emerald-50 h-full">{% block content %} {% endblock %}</div>
+			</div>
 
-</head>
-<body>
-<div class="">
-    <div class="min-w-full min-h-screen bg-gradient-to-r from-indigo-950 to-slate-900">
-        <nav class="bg-gradient-to-r from-emerald-500 to-indigo-950 text-white p-4">
-            <div class="container mx-auto flex justify-between items-center">
-                <div>
-                    <img
-                            src="https://scqafmxghfczndznwuiu.supabase.co/storage/v1/object/public/assets/crcdevtestlogo.png?t=2024-02-20T16%3A16%3A11.369Z"
-                            alt="Logo"
-                            class="h-14 w-14 -my-2 object-cover"
-                    />
-                </div>
-                <div class="hidden md:flex space-x-4">
-                    <a
-                            href="/workouts"
-                            class="p-2 rounded transition ease-in-out hover:-translate-x-1 hover:scale-110 hover:bg-emerald-500 font-bold duration-300"
-                    >Workouts</a
-                    >
-                    <a
-                            href="/participants"
-                            class="p-2 rounded transition ease-in-out hover:-translate-x-1 hover:scale-110 hover:bg-emerald-500 font-bold duration-300"
-                    >Participants</a
-                    >
-                    <a
-                            href="/stats"
-                            class="p-2 rounded transition ease-in-out hover:-translate-x-1 hover:scale-110 hover:bg-emerald-500 font-bold duration-300"
-                    >Stats</a
-                    >
-                </div>
-                <div class="md:hidden">
-                    <button id="menuButton" class="focus:outline-none focus:shadow-outline">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                  d="M4 6h16M4 12h16m-7 6h7"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <!-- Mobile Menu -->
-            <div id="mobileMenu" class="md:hidden hidden">
-                <a href="#" class="block p-2 hover:bg-gray-700 rounded">Home</a>
-                <a href="#" class="block p-2 hover:bg-gray-700 rounded">About</a>
-                <a href="#" class="block p-2 hover:bg-gray-700 rounded">Services</a>
-                <a href="#" class="block p-2 hover:bg-gray-700 rounded">Contact</a>
-            </div>
-        </nav>
+			<script
+				src="https://code.jquery.com/jquery-2.2.4.min.js"
+				integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+				crossorigin="anonymous"
+			></script>
+			<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+			<script src="https://cdn.datatables.net/v/dt/dt-2.0.0/datatables.min.js"></script>
+			<script src="https://cdn.datatables.net/2.0.0/js/dataTables.tailwindcss.js"></script>
+			<script src="https://scqafmxghfczndznwuiu.supabase.co/storage/v1/object/public/assets/ajax_helper.js?t=2024-02-21T05%3A17%3A52.365Z"></script>
+			<script src="https://scqafmxghfczndznwuiu.supabase.co/storage/v1/object/public/assets/cookies_helper.js?t=2024-02-21T05%3A18%3A21.666Z"></script>
+			<script src="https://scqafmxghfczndznwuiu.supabase.co/storage/v1/object/public/assets/not-hennie.js?t=2024-02-21T03%3A49%3A11.589Z"></script>
+			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+			<script>
+				toastr.options = {
+					showMethod: "fadeIn", // Ensure this is a valid method
+					// other options...
+				};
 
-        <div class="container mx-auto p-10 text-emerald-50 h-full">{% block content %} {% endblock %}</div>
-    </div>
+				document.getElementById("menuButton").addEventListener("click", function () {
+					var menu = document.getElementById("mobileMenu");
+					if (menu.classList.contains("hidden")) {
+						menu.classList.remove("hidden");
+					} else {
+						menu.classList.add("hidden");
+					}
+				});
+			</script>
 
-
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="https://cdn.datatables.net/v/dt/dt-2.0.0/datatables.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.0/js/dataTables.tailwindcss.js"></script>
-   <script>
-        toastr.options = {
-          showMethod: 'fadeIn', // Ensure this is a valid method
-          // other options...
-        };
-
-        document.getElementById("menuButton").addEventListener("click", function () {
-            var menu = document.getElementById("mobileMenu");
-            if (menu.classList.contains("hidden")) {
-                menu.classList.remove("hidden");
-            } else {
-                menu.classList.add("hidden");
-            }
-        });
-
-    </script>
-
-    {% block scripts %} {% endblock %}
-</div>
-</body>
+			{% block scripts %} {% endblock %}
+		</div>
+	</body>
 </html>

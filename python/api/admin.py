@@ -4,7 +4,7 @@ from .models import *
 
 @admin.register(Participant)
 class ParticipantAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'phone', 'created_at', 'age', 'gender', 'height', 'weight', 'bmi')
+    list_display = ('name', 'surname', 'email', 'phone', 'created_at',)
 
 
 @admin.register(Workout)

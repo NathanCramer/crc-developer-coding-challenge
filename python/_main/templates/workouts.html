@@ -1,5 +1,5 @@
 {% extends '_layout.html' %} {% block content %}
-<div class="flex flex-row justify-between">
+<div class="flex flex-row justify-between mb-10">
     <h1 class="text-3xl font-bold">Workouts</h1>
     <a
             href="/workout/add"
@@ -21,7 +21,7 @@
     {% for workout in workouts %}
     <tr>
         <td>
-            <button onclick="viewWorkout()">view</button>
+            <a href="/workout/edit/{{workout.id}}" class="p-1 px-3 text-xs bg-sky-800 rounded-full hover:bg-sky-950">edit</a>
         </td>
         <td>{{ workout.created_at }}</td>
         <td>{{ workout.name }}</td>
@@ -42,12 +42,5 @@
     $(document).ready(function () {
         $("#tblWorkouts").DataTable();
     });
-
-    // View Workout Modal
-    function viewWorkout() {
-        $("#modalViewWorkoutContainer").removeClass("hidden");
-        $("#modalViewWorkoutBackdrop").removeClass("opacity-0");
-    }
-
 </script>
 {% endblock %}

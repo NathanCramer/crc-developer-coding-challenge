@@ -1,7 +1,31 @@
-{% extends '_layout.html' %}
+{% extends '_layout.html' %} {% block content %}
+<canvas id="myChart"></canvas>
+{% endblock %} {% block scripts %}
+<script>
+	function getRandomRGB() {
+		const r = Math.floor(Math.random() * 256);
+		const g = Math.floor(Math.random() * 256);
+		const b = Math.floor(Math.random() * 256);
+		return `rgb(${r}, ${g}, ${b})`;
+	}
 
-{% block content %}
-  <h1 class="text-3xl font-bold">
-    Hello world!
-  </h1>
+	const ctx = document.getElementById("myChart");
+
+	const workoutChartData = {{participant_workout_chart_data  | safe}};
+	const myChart = new Chart(ctx, {
+		type: "line",
+		data: {
+			labels: {{workouts | safe }},
+			datasets: workoutChartData,
+		},
+		options: {
+			plugins: {
+				legend: {
+					position: "right",
+					align: "start",
+				},
+			},
+		},
+	});
+</script>
 {% endblock %}
