@@ -49,6 +49,7 @@ def get_workout_scores():
                     'workout_id': workout.id,
                     'workout_name': workout.name,
                     'score': -1,
+                    'read_score': "No Score",
                     'standing': 0,  # Participants Rank in this workout (where 1 is the best)
                 } for workout in workouts
             ],
@@ -113,5 +114,11 @@ def get_workout_scores():
         for workout_score in participant_workout['workout_scores']:
             if workout_score['score'] == -1:
                 workout_score['score'] = "No Score"
+
+    # Add a read-value where the comma is replaced with a :
+    for participant_workout in participant_workouts:
+        for workout_score in participant_workout['workout_scores']:
+            workout_score['read_score'] = str(workout_score['score']).replace('.', ':')
+
 
     return participant_workouts

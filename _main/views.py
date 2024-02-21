@@ -116,6 +116,15 @@ def save_score(request):
     # Validate score
     try:
         score = float(score)
+
+        # Score must be a positive number
+        if score < 0:
+            return JsonResponse({'status': 400, 'message': 'Invalid score'})
+
+        # Decimal part of the score must be less than 60
+        if score % 1 >= 60:
+            return JsonResponse({'status': 400, 'message': 'Invalid score'})
+
     except ValueError:
         return JsonResponse({'status': 400, 'message': 'Invalid score'})
 
@@ -127,7 +136,8 @@ def save_score(request):
         participant_workout.save()
     else:
         participant_workout = participant_workout_query.get()
-        participant_workout.score = score
+        # Save score value as MM:SS
+
         participant_workout.save()
 
     return JsonResponse({'status': 200, 'message': 'Score saved successfully'})

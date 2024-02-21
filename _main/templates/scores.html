@@ -48,7 +48,7 @@
         <td>{{ participant_workout.participant }}</td>
         {% for workout_score in participant_workout.workout_scores %}
         <td>
-            <div class="textField">{{ workout_score.score }} ({{workout_score.standing}})</div>
+            <div class="textField">{{ workout_score.read_score }} ({{workout_score.standing}})</div>
             <input
                     type="number"
                     class="editField hidden bg-slate-900 text-white p-2 rounded"
@@ -88,6 +88,27 @@
 
 
     function updateWorkoutScore(participantId, workoutId, score) {
+        // Validate the score
+        // Score must be a positive number
+        if (score < 0) {
+            toastr.error("Score cannot be negative");
+            return;
+        }
+
+
+        // Decimal part of the score must be less than 2 digits
+        if (score.toString().split(".")[1]?.length > 2) {
+            toastr.error("Score cannot have more than 2 decimal places");
+            return;
+        }
+
+        // Decimal part must be less than 60
+        if (score.toString().split(".")[1] > 59) {
+            toastr.error("Score cannot have more than 59 seconds");
+            return;
+        }
+
+
         console.log(`Updating score for participant workout ${participantId} and workout ${workoutId} to ${score}`);
 
         // Update the score in the database
